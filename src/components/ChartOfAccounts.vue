@@ -10,33 +10,31 @@
       <input type="submit" value="Submit" />
     </form>
     <div>
-    <ul>
-      <button @click="toggleShow">toggleshow</button>
-      <li v-bind:key="account.name" v-for="account in Accounts">
-        {{ account.type }}
-        <div>
-        {{ show == 1 ? account.description: null }}
-        </div>
-      </li>
-    </ul>
+      <ul>
+        <button @click="toggleShow">toggleshow</button>
+        <li v-bind:key="account.name" v-for="account in Accounts">
+          {{ account.type }}
+          <div>{{ show == 1 ? account.description: null }}</div>
+        </li>
+      </ul>
     </div>
-     <v-simple-table fixed-header height="300px">
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">Name</th>
-          <th class="text-left">Type</th>
-          <th class="text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="account in Accounts" :key="account.name">
-          <td>{{ account.name }}</td>
-          <td>{{ account.type }}</td>
-          <td>{{ account.description}}</td>
-        </tr>
-      </tbody>
-    </template>
+    <v-simple-table fixed-header height="300px">
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Name</th>
+            <th class="text-left">Type</th>
+            <th class="text-left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="account in Accounts" :key="account.name">
+            <td>{{ account.name }}</td>
+            <td>{{ account.type }}</td>
+            <td>{{ account.description}}</td>
+          </tr>
+        </tbody>
+      </template>
     </v-simple-table>
   </div>
 </template>
@@ -68,6 +66,7 @@ export default {
       };
 
       this.Accounts.push(Account);
+      this.Accounts.sort((a, b) => (a.type > b.type) ? 1 : -1);
 
       if (this.AccountTypes.indexOf(this.Account.type) === -1) {
         this.AccountTypes.push(this.Account.type);
@@ -77,10 +76,12 @@ export default {
       this.Account.name = "";
       this.Account.type = "";
       this.Account.description = "";
+
     },
-    toggleShow () {
+    toggleShow() {
       this.show = !this.show;
-    }
+    },
+    
   }
 };
 </script>
