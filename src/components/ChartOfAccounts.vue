@@ -15,11 +15,29 @@
       <li v-bind:key="account.name" v-for="account in Accounts">
         {{ account.type }}
         <div>
-        {{ show == 1 ?  null: account.description }}
+        {{ show == 1 ? account.description: null }}
         </div>
       </li>
     </ul>
     </div>
+     <v-simple-table fixed-header height="300px">
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-left">Name</th>
+          <th class="text-left">Type</th>
+          <th class="text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="account in Accounts" :key="account.name">
+          <td>{{ account.name }}</td>
+          <td>{{ account.type }}</td>
+          <td>{{ account.description}}</td>
+        </tr>
+      </tbody>
+    </template>
+    </v-simple-table>
   </div>
 </template>
 
