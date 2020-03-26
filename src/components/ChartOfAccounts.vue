@@ -9,6 +9,17 @@
       <p>Description is: {{ Account.description }}</p>
       <input type="submit" value="Submit" />
     </form>
+    <div>
+    <ul>
+      <button @click="toggleShow">toggleshow</button>
+      <li v-bind:key="account.name" v-for="account in Accounts">
+        {{ account.type }}
+        <div>
+        {{ show == 1 ?  null: account.description }}
+        </div>
+      </li>
+    </ul>
+    </div>
   </div>
 </template>
 
@@ -17,6 +28,7 @@ export default {
   name: "ChartOfAccounts",
   data() {
     return {
+      show: false,
       Account: {
         name: "",
         type: "",
@@ -47,6 +59,9 @@ export default {
       this.Account.name = "";
       this.Account.type = "";
       this.Account.description = "";
+    },
+    toggleShow () {
+      this.show = !this.show;
     }
   }
 };
