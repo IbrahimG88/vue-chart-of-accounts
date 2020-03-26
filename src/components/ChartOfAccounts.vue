@@ -47,6 +47,10 @@
             <td>{{ account.name }}</td>
             <td>{{ account.type }}</td>
             <td>{{ account.description}}</td>
+            <td>
+             <i @click="deleteAccount(account.name)" class="fas fa-trash-alt"></i>
+             </td>
+            
           </tr>
         </tbody>
       </template>
@@ -92,6 +96,9 @@ export default {
       this.Account.type = "";
       this.Account.description = "";
 
+    },
+    deleteAccount(accountName) {
+      this.Accounts = this.Accounts.filter(todo => todo.name !== accountName)
     }
   }
 };
